@@ -1,0 +1,24 @@
+version: 3
+
+vars:
+  COMPILER: 'gcc'
+  TYPE_FILES: './types.h'
+  UTILS_FILES: './utils/**/*.{h,c}'
+  LINEAR_SEARCH_FILES: './search/linear-search/linear-search.{h,c} ./search/linear-search/main.c'
+  LINEAR_SEARCH_OUTPUT_FILE: './linear-search.o'
+
+tasks:
+  compile-linear-search:
+    cmd: '{{ .COMPILER }} {{ .TYPE_FILES }} {{ .UTILS_FILES }} {{ .LINEAR_SEARCH_FILES }} -o {{ .LINEAR_SEARCH_OUTPUT_FILE }}'
+
+  run-linear-search:
+    cmd: '{{ .LINEAR_SEARCH_OUTPUT_FILE }}'
+
+  remove-linear-search-binary-file:
+    cmd: 'rm {{ .LINEAR_SEARCH_OUTPUT_FILE }}'
+
+  linear-search:
+    cmds:
+      - task: compile-linear-search
+      - task: run-linear-search
+      - task: remove-linear-search-binary-file
