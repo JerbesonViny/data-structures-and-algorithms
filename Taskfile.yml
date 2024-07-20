@@ -6,6 +6,8 @@ vars:
   UTILS_FILES: './utils/**/*.{h,c}'
   LINEAR_SEARCH_FILES: './search/linear-search/linear-search.{h,c} ./search/linear-search/main.c'
   LINEAR_SEARCH_OUTPUT_FILE: './linear-search.o'
+  BINARY_SEARCH_FILES: './search/binary-search/binary-search.{h,c} ./search/binary-search/main.c'
+  BINARY_SEARCH_OUTPUT_FILE: './binary-search.o'
 
 tasks:
   compile-linear-search:
@@ -22,3 +24,18 @@ tasks:
       - task: compile-linear-search
       - task: run-linear-search
       - task: remove-linear-search-binary-file
+
+  compile-binary-search:
+    cmd: '{{ .COMPILER }} -Wall -g {{ .TYPE_FILES }} {{ .UTILS_FILES }} {{ .BINARY_SEARCH_FILES }} -o {{ .BINARY_SEARCH_OUTPUT_FILE }} -lm'
+
+  run-binary-search:
+    cmd: '{{ .BINARY_SEARCH_OUTPUT_FILE }}'
+
+  remove-binary-search-binary-file:
+    cmd: 'rm {{ .BINARY_SEARCH_OUTPUT_FILE }}'
+
+  binary-search:
+    cmds:
+      - task: compile-binary-search
+      - task: run-binary-search
+      - task: remove-binary-search-binary-file

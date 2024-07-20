@@ -21,7 +21,7 @@ int main()
 {
     char *filename = "data/ascending-numeric-values.txt";
     char *file_content = read_file(filename);
-    IntArray numbers = parse_char_to_int_array(file_content, ',');
+    IntArray numbers = parse_char_to_int_array(file_content, ",");
 
     int existent_value = 7;
     int unexistent_value = 32;
