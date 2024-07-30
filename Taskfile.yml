@@ -10,6 +10,8 @@ vars:
   BINARY_SEARCH_OUTPUT_FILE: './binary-search.o'
   BUBBLE_SORT_FILES: './sort/bubble-sort/bubble-sort.{h,c} ./sort/bubble-sort/main.c'
   BUBBLE_SORT_OUTPUT_FILE: './bubble-sort.o'
+  INSERTION_SORT_FILES: './sort/insertion-sort/insertion-sort.{h,c} ./sort/insertion-sort/main.c'
+  INSERTION_SORT_OUTPUT_FILE: './insertion-sort.o'
 
 tasks:
   compile-linear-search:
@@ -43,7 +45,7 @@ tasks:
       - task: remove-binary-search-binary-file
 
   compile-bubble-sort:
-    cmd: '{{ .COMPILER }}  -g {{ .TYPE_FILES }} {{ .UTILS_FILES }} {{ .BUBBLE_SORT_FILES }} -o {{ .BUBBLE_SORT_OUTPUT_FILE }} -lm'
+    cmd: '{{ .COMPILER }} -g {{ .TYPE_FILES }} {{ .UTILS_FILES }} {{ .BUBBLE_SORT_FILES }} -o {{ .BUBBLE_SORT_OUTPUT_FILE }} -lm'
 
   run-bubble-sort:
     cmd: '{{ .BUBBLE_SORT_OUTPUT_FILE }}'
@@ -56,3 +58,18 @@ tasks:
       - task: compile-bubble-sort
       - task: run-bubble-sort
       - task: remove-bubble-sort-file
+
+  compile-insertion-sort:
+    cmd: '{{ .COMPILER }} -Wall -g {{ .TYPE_FILES }} {{ .UTILS_FILES }} {{ .INSERTION_SORT_FILES }} -o {{ .INSERTION_SORT_OUTPUT_FILE }} -lm'
+
+  run-insertion-sort:
+    cmd: '{{ .INSERTION_SORT_OUTPUT_FILE }}'
+
+  remove-insertion-sort-file:
+    cmd: 'rm {{ .INSERTION_SORT_OUTPUT_FILE }}'
+
+  insertion-sort:
+    cmds:
+      - task: compile-insertion-sort
+      - task: run-insertion-sort
+      - task: remove-insertion-sort-file
