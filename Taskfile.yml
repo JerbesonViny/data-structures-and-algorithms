@@ -8,6 +8,8 @@ vars:
   LINEAR_SEARCH_OUTPUT_FILE: './linear-search.o'
   BINARY_SEARCH_FILES: './search/binary-search/binary-search.{h,c} ./search/binary-search/main.c'
   BINARY_SEARCH_OUTPUT_FILE: './binary-search.o'
+  BUBBLE_SORT_FILES: './sort/bubble-sort/bubble-sort.{h,c} ./sort/bubble-sort/main.c'
+  BUBBLE_SORT_OUTPUT_FILE: './bubble-sort.o'
 
 tasks:
   compile-linear-search:
@@ -39,3 +41,18 @@ tasks:
       - task: compile-binary-search
       - task: run-binary-search
       - task: remove-binary-search-binary-file
+
+  compile-bubble-sort:
+    cmd: '{{ .COMPILER }}  -g {{ .TYPE_FILES }} {{ .UTILS_FILES }} {{ .BUBBLE_SORT_FILES }} -o {{ .BUBBLE_SORT_OUTPUT_FILE }} -lm'
+
+  run-bubble-sort:
+    cmd: '{{ .BUBBLE_SORT_OUTPUT_FILE }}'
+
+  remove-bubble-sort-file:
+    cmd: 'rm {{ .BUBBLE_SORT_OUTPUT_FILE }}'
+
+  bubble-sort:
+    cmds:
+      - task: compile-bubble-sort
+      - task: run-bubble-sort
+      - task: remove-bubble-sort-file
