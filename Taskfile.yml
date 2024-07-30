@@ -12,6 +12,8 @@ vars:
   BUBBLE_SORT_OUTPUT_FILE: './bubble-sort.o'
   INSERTION_SORT_FILES: './sort/insertion-sort/insertion-sort.{h,c} ./sort/insertion-sort/main.c'
   INSERTION_SORT_OUTPUT_FILE: './insertion-sort.o'
+  SELECTION_SORT_FILES: './sort/selection-sort/selection-sort.{h,c} ./sort/selection-sort/main.c'
+  SELECTION_SORT_OUTPUT_FILE: './selection-sort.o'
 
 tasks:
   compile-linear-search:
@@ -73,3 +75,18 @@ tasks:
       - task: compile-insertion-sort
       - task: run-insertion-sort
       - task: remove-insertion-sort-file
+
+  compile-selection-sort:
+    cmd: '{{ .COMPILER }} -Wall -g {{ .TYPE_FILES }} {{ .UTILS_FILES }} {{ .SELECTION_SORT_FILES }} -o {{ .SELECTION_SORT_OUTPUT_FILE }} -lm'
+
+  run-selection-sort:
+    cmd: '{{ .SELECTION_SORT_OUTPUT_FILE }}'
+
+  remove-selection-sort-file:
+    cmd: 'rm {{ .SELECTION_SORT_OUTPUT_FILE }}'
+
+  selection-sort:
+    cmds:
+      - task: compile-selection-sort
+      - task: run-selection-sort
+      - task: remove-selection-sort-file
